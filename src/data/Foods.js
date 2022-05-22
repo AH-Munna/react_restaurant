@@ -174,13 +174,13 @@ const Foods = [
                 author: "Rahat",
                 date: "2017-12-02T17:57:28.556094Z"
             },
-            {
-                id: 4,
-                rating: 2,
-                comment: "It's your birthday, we're gonna party!",
-                author: "Rony",
-                date: "2019-12-02T17:57:28.556094Z"
-            }
+            // {
+            //     id: 4,
+            //     rating: 2,
+            //     comment: "It's your birthday, we're gonna party!",
+            //     author: "Rony",
+            //     date: "2019-12-02T17:57:28.556094Z"
+            // }
         ]
     }
 ]

@@ -1,0 +1,9 @@
+.my-div {
+    position: relative;
+}
+
+.my-div span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
