@@ -7,7 +7,9 @@ function MainComp() {
     return (
         <div>
             <Header />
-            <Body />
+            <div className="container">
+                <Body />
+            </div>
             <Footer />
         </div>
     );

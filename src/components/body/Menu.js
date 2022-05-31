@@ -1,27 +1,53 @@
 import React, { Component } from "react";
+import { Container, Row } from "react-bootstrap";
 import Foods from "../../data/Foods";
-import DishDetail from "./DishDetail";
 import ItemMenu from "./ItemMenu";
+import DishDetail from "./DishDetail"
+import ModalFood from "./ModalFood";
+// import ReactModal from 'react-modal';
 
 class Menu extends Component {
     state = {
         foods: Foods,
         selectedDish: null,
+        modalToggle: false,
+        show: false,
+        setShow: false,
     }
+
+    // for Modal
+    /*handleClose = () => {
+        this.setState({
+            setShow: false,
+        });
+    };
+    handleShow = () => {
+        this.setState({
+            setShow: true,
+        });
+    }; */
 
     onDishSelect = dish => {
         this.setState({
             selectedDish: dish,
         });
+        this.modalHandler();
+    }
+    modalHandler = () => {
+        this.setState({
+            modalToggle: !this.state.modalToggle,
+        })
     }
 
     render() {
-        const menu = this.state.foods.map(item => {
+        const menu = this.state.foods.map((item, index) => {
             return (
                 <ItemMenu
                     dish={item}
-                    key={item.id}
-                    onDishSelect={this.onDishSelect} />
+                    key={index}
+                    // should be key={item.id}
+                    onDishSelect={this.onDishSelect}
+                    handleShow={this.handleShow} />
             );
         })
 
@@ -31,20 +57,20 @@ class Menu extends Component {
         }
 
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-4">
-                        {menu}
-                    </div>
-                    <div className="col-md-8">
-                        <div
-                            //style={{ position: "fixed", width: "50%" }}
-                            className="sticky-top">
-                            {dishDetail}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Container>
+                {/* <Button onClick={this.modalHandler2}>Open Test Modal</Button>
+                <ReactModal isOpen={this.state.modalToggle2}>
+                    <h1>Test Modal</h1>
+                </ReactModal> */}
+                <ModalFood
+                    modalToggle={this.state.modalToggle}
+                    dishDetail={dishDetail}
+                    modalHandler={this.modalHandler}
+                    dish={this.state.selectedDish} />
+                <Row>
+                    {menu}
+                </Row>
+            </Container>
         );
     };
 }
