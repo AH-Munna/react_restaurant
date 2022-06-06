@@ -1,18 +1,41 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Card, CardImg, CardBody, CardTitle, CardText } from "reactstrap";
 import LoadComments from "./LoadComments";
 
+const mapStateToProps = state => {
+    return {
+        state: state.myReducer,
+    }
+}
+
 class DishDetail extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            comments: props.state.comments,
+        }
+    }
+
+
     render() {
-        const allComments = this.props.dish.comments.map(item => {
+        //console.log("dishdetail render", this.props.comments);
+        // const allComments = this.state.comments.map(comment => {
+        //     if (this.props.dish.id === comment.dishId) {
+        //         return (
+        //             <LoadComments commentObj={comment} key={comment.id} noComment={false} />
+        //         );
+        //     }
+        //     return (<LoadComments noComment={true} key={comment.id} />);
+        // });
+        const allComments = this.props.comments.map(comment => {
             return (
-                <LoadComments
-                    commentObj={item}
-                    key={item.id} />
-            );
+                <LoadComments key={comment.id} commentObj={comment} />
+            )
         })
 
-        //console.log(allComments);
+        //console.log(this.props.comments);
 
         return (
             <div>
@@ -38,4 +61,4 @@ class DishDetail extends Component {
     };
 }
 
-export default DishDetail;
+export default connect(mapStateToProps)(DishDetail);

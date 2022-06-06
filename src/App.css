@@ -1,14 +1,10 @@
 .App {
   text-align: center;
+  background-image: url("https://images.pexels.com/photos/1088158/pexels-photo-1088158.jpeg");
 }
 
-.myBtnBG {
-  background-color: red;
-  /* For browsers that do not support gradients */
-  background-image: linear-gradient(to bottom right, rgba(218, 30, 30, 0.397), rgba(170, 170, 52, 0.37));
-}
-
-.myBtnBG:hover {
-  color: white;
-  background-image: linear-gradient(to bottom right, red, yellow);
+.navSticky {
+  top: 0;
+  position: fixed;
+  width: 100%;
 }

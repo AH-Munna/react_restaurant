@@ -1,14 +1,37 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container, Row } from "react-bootstrap";
-import Foods from "../../data/Foods";
+// import Foods from "../../data/Foods";
 import ItemMenu from "./ItemMenu";
 import DishDetail from "./DishDetail"
 import ModalFood from "./ModalFood";
+// import COMMENTS from "../../data/Comments";
+import { connect } from "react-redux";
+import { addComment, AsyncFetchDishes } from "../../redux/actionCreator";
+import PageLoad from "./PageLoad";
+// import { addComment } from "../../redux/actionCreator";
+// import { ADD_COMMENT } from "../../redux/actTypes";
 // import ReactModal from 'react-modal';
 
-class Menu extends Component {
+const mapStateToProps = state => {
+    return {
+        foods: state.myReducer.dishes,
+        comments: state.myReducer.comments,
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        addComment: (dishId, author, comment, rating) => {
+            console.log("menu dispatch", dishId, author, comment, rating);
+            return dispatch(addComment(dishId, author, comment, rating))
+        },
+        fetchDishes: () => dispatch(AsyncFetchDishes()),
+    }
+}
+
+class Menu extends React.Component {
     state = {
-        foods: Foods,
+        // foods: Foods,
+        // comments: COMMENTS,
         selectedDish: null,
         modalToggle: false,
         show: false,
@@ -38,9 +61,20 @@ class Menu extends Component {
             modalToggle: !this.state.modalToggle,
         })
     }
+    componentDidMount() {
+        console.log(this.props);
+        this.props.fetchDishes();
+    }
 
     render() {
-        const menu = this.state.foods.map((item, index) => {
+        document.title = "Foods Menu";
+        if (this.props.foods.isLoading) {
+            return (
+                <PageLoad />
+            );
+        }
+        // console.log("props", this.props);
+        const menu = this.props.foods.dishes.map((item, index) => {
             return (
                 <ItemMenu
                     dish={item}
@@ -53,8 +87,14 @@ class Menu extends Component {
 
         let dishDetail = null;
         if (this.state.selectedDish != null) {
-            dishDetail = <DishDetail dish={this.state.selectedDish} />
+            const selectedDishComments = this.props.comments.filter(comment => {
+                return comment.dishId === this.state.selectedDish.id;
+            })
+            //console.log("selectedComments Filter", selectedDishComments);
+            dishDetail = <DishDetail dish={this.state.selectedDish} comments={selectedDishComments} />
         }
+
+        //console.log("menu.js", this.props.comments);
 
         return (
             <Container>
@@ -66,7 +106,8 @@ class Menu extends Component {
                     modalToggle={this.state.modalToggle}
                     dishDetail={dishDetail}
                     modalHandler={this.modalHandler}
-                    dish={this.state.selectedDish} />
+                    dish={this.state.selectedDish}
+                    addComment={this.props.addComment} />
                 <Row>
                     {menu}
                 </Row>
@@ -75,4 +116,4 @@ class Menu extends Component {
     };
 }
 
-export default Menu;
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

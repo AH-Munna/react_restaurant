@@ -5,9 +5,9 @@ import { Button, Container, Dropdown, Form, FormControl, Nav, Navbar, NavDropdow
 class NavBar extends Component {
     render() {
         return (
-            <Navbar bg="danger" expand="lg" className='sticky-top navbar-dark'>
+            <Navbar bg="danger" expand="lg" className='navbar-dark'>
                 <Container fluid>
-                    <a className="navbar-brand" href="/">Reload site</a>
+                    <a className="navbar-brand" href="/">React Restaurant</a>
                     {/* <Navbar.Brand href="#">Navbar scroll</Navbar.Brand> */}
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">

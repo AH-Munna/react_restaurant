@@ -5,7 +5,7 @@ import "../../StyleSheets/ItemMenu.css";
 
 const ItemMenu = props => {
     return (
-        <Col xl={3} lg={4} md={6} className="my-cards">{/*xs={12} sm={12*/}
+        <Col xxl={3} xl={4} lg={6} className="my-cards">{/*xs={12} sm={12*/}
             <Card onClick={() => props.onDishSelect(props.dish)} className="my-5 p-1 shadow" style={{ cursor: "pointer" }}>
                 <CardBody>
                     <CardImg

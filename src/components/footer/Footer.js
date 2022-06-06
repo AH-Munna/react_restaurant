@@ -1,12 +1,7 @@
 import React from "react";
-import {
-    Box,
-    Container,
-    Row,
-    Column,
-    FooterLink,
-    Heading,
-} from "./FooterStyles";
+import { Link } from "react-router-dom";
+import { Box, Container, Row, Column, Heading, } from "./FooterStyles";
+import '../../StyleSheets/footer.css';
 
 const Footer = () => {
     return (
@@ -22,54 +17,50 @@ const Footer = () => {
                 <Row>
                     <Column>
                         <Heading>About Us</Heading>
-                        <FooterLink href="#">Aim</FooterLink>
-                        <FooterLink href="#">Vision</FooterLink>
-                        <FooterLink href="#">Testimonials</FooterLink>
+                        <Link className="myFooterLink" to="#">Aim</Link>
+                        <Link className="myFooterLink" to="#">Vision</Link>
+                        <Link className="myFooterLink" to="#">Testimonials</Link>
                     </Column>
                     <Column>
                         <Heading>Services</Heading>
-                        <FooterLink href="#">Writing</FooterLink>
-                        <FooterLink href="#">Internships</FooterLink>
-                        <FooterLink href="#">Coding</FooterLink>
-                        <FooterLink href="#">Teaching</FooterLink>
+                        <Link className="myFooterLink" to="#">Writing</Link>
+                        <Link className="myFooterLink" to="#">Internships</Link>
+                        <Link className="myFooterLink" to="#">Coding</Link>
+                        <Link className="myFooterLink" to="#">Teaching</Link>
                     </Column>
                     <Column>
                         <Heading>Contact Us</Heading>
-                        <FooterLink href="#">Uttar Pradesh</FooterLink>
-                        <FooterLink href="#">Ahemdabad</FooterLink>
-                        <FooterLink href="#">Indore</FooterLink>
-                        <FooterLink href="#">Mumbai</FooterLink>
+                        <Link className="myFooterLink" to="/contact-ah-munna">AH Munna</Link>
+                        <Link className="myFooterLink" to="#">Sector-14</Link>
+                        <Link className="myFooterLink" to="#">Uttara</Link>
+                        <Link className="myFooterLink" to="#">Dhaka</Link>
                     </Column>
                     <Column>
                         <Heading>Social Media</Heading>
-                        <FooterLink href="#">
-                            <i className="fab fa-facebook-f">
-                                <span style={{ marginLeft: "10px" }}>
-                                    Facebook
-                                </span>
-                            </i>
-                        </FooterLink>
-                        <FooterLink href="#">
-                            <i className="fab fa-instagram">
-                                <span style={{ marginLeft: "10px" }}>
-                                    Instagram
-                                </span>
-                            </i>
-                        </FooterLink>
-                        <FooterLink href="#">
-                            <i className="fab fa-twitter">
-                                <span style={{ marginLeft: "10px" }}>
-                                    Twitter
-                                </span>
-                            </i>
-                        </FooterLink>
-                        <FooterLink href="#">
-                            <i className="fab fa-youtube">
-                                <span style={{ marginLeft: "10px" }}>
-                                    Youtube
-                                </span>
-                            </i>
-                        </FooterLink>
+                        <Link className="myFooterLink" to="#">
+                            <i className="fab fa-facebook-f text-primary"></i>
+                            <span style={{ marginLeft: "10px" }}>
+                                Facebook
+                            </span>
+                        </Link>
+                        <Link className="myFooterLink" to="#">
+                            <i className="fab fa-instagram bg-danger text-white"></i>
+                            <span style={{ marginLeft: "10px" }}>
+                                Instagram
+                            </span>
+                        </Link>
+                        <Link className="myFooterLink" to="#">
+                            <i className="fab fa-twitter text-info"></i>
+                            <span style={{ marginLeft: "10px" }}>
+                                Twitter
+                            </span>
+                        </Link>
+                        <Link className="myFooterLink" to="#">
+                            <i className="fab fa-youtube text-danger"></i>
+                            <span style={{ marginLeft: "10px" }}>
+                                Youtube
+                            </span>
+                        </Link>
                     </Column>
                 </Row>
             </Container>

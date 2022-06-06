@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { Input } from "reactstrap";
+import '../../StyleSheets/gradient.css'
 
 class Contact extends React.Component {
     constructor(props) {
@@ -50,24 +51,25 @@ class Contact extends React.Component {
     }
 
     render() {
+        document.title = "Contact";
         return (
             <>
                 <Row>
-                    <Col className="my-3">
-                        <h3 className="text-info">Send us your feedback</h3><hr className="text-info" />
+                    <Col className="my-2">
+                        <h3 className="display-5 fw-bold text-secondary">Send us your feedback</h3><hr className="text-info" />
                     </Col>
                 </Row>
                 <Row>
-                    <Form className="col-md-6 mx-auto my-5 shadow p-5" onSubmit={this.handleSubmit}>
+                    <Form className="col-md-7 myBGT mx-auto my-2 shadow p-5" onSubmit={this.handleSubmit}>
                         <Form.Group className="mb-5" controlId="formBasicFullName">
-                            <Form.Label>Full name</Form.Label>
-                            <Form.Control type="text" placeholder="name...." name="fullName" onChange={this.handleInput} />
+                            <Form.Label className="fs-4">Full name</Form.Label>
+                            <Form.Control className="myBG" type="text" placeholder="name...." name="fullName" onChange={this.handleInput} />
                         </Form.Group>
 
                         <Form.Group className="mb-5" controlId="formBasicMessage">
                             <Row className="col-md-5 mx-auto mb-3">
                                 {/* md={{ size: 3, offset: 5 }} */}
-                                <Input type="select" name="constactType" onChange={this.handleSelect} >
+                                <Input className="myBG mx-auto" style={{ width: "250px" }} type="select" name="constactType" onChange={this.handleSelect} >
                                     <option>Email</option>
                                     <option>Phone</option>
                                 </Input>
@@ -75,12 +77,12 @@ class Contact extends React.Component {
                             <Row>
                                 {
                                     this.state.contactType === "Email" ?
-                                        <Form.Group className="" controlId="formBasicEmail">
-                                            <Form.Control type="email" placeholder="email...." name="email" value={this.state.email} onChange={this.handleInput} />
+                                        <Form.Group controlId="formBasicEmail">
+                                            <Form.Control className="myBG" type="email" placeholder="email...." name="email" value={this.state.email} onChange={this.handleInput} />
                                         </Form.Group> :
                                         this.state.contactType === "Phone" ?
-                                            <Form.Group className="" controlId="formBasicPhone">
-                                                <Form.Control type="number" placeholder="phone...." name="phone" value={this.state.phone} onChange={this.handleInput} />
+                                            <Form.Group controlId="formBasicPhone">
+                                                <Form.Control className="myBG" type="number" placeholder="phone...." name="phone" value={this.state.phone} onChange={this.handleInput} />
                                             </Form.Group> :
                                             <></>
                                 }
@@ -88,15 +90,15 @@ class Contact extends React.Component {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicMessage">
-                            <Form.Label><strong>Your Message</strong></Form.Label>
-                            <Form.Control as="textarea" rows={10} name="contactMessage" onChange={this.handleInput} />
+                            <Form.Label className="fw-b fs-5">Your Message</Form.Label>
+                            <Form.Control className="myBG fs-5" as="textarea" rows={10} name="contactMessage" onChange={this.handleInput} />
                         </Form.Group>
 
                         <Form.Group className="mb-3 d-flex justify-content-center" controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Agree to Term" checked={this.state.termAgree} onChange={this.handleCheckBox} />
                         </Form.Group>
 
-                        <button className="px-4 py-2 btn rounded-pill myBtnBG" type="submit" disabled={!this.state.termAgree} >
+                        <button className="px-4 py-2 btn rounded-pill myBtnBG shadow" type="submit" disabled={!this.state.termAgree} >
                             Send Feedback
                         </button>
                     </Form>

@@ -1,6 +1,6 @@
 import React from "react";
 import Body from "./body/Body";
-import Footer from "./footer/Footer";
+import FooterControl from "./footer/FooterControl";
 import Header from "./header/Header";
 
 function MainComp() {
@@ -10,7 +10,7 @@ function MainComp() {
             <div className="container">
                 <Body />
             </div>
-            <Footer />
+            <FooterControl />
         </div>
     );
 }
