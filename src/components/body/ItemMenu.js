@@ -1,9 +1,11 @@
 import React from "react";
 import { Col } from "react-bootstrap";
 import { Card, CardImg, CardImgOverlay, CardBody, CardTitle, CardText } from "reactstrap";
+import { base_url } from "../../redux/actTypes";
 import "../../StyleSheets/ItemMenu.css";
 
 const ItemMenu = props => {
+    // console.log("itemMenu", props);
     return (
         <Col xxl={3} xl={4} lg={6} className="my-cards">{/*xs={12} sm={12*/}
             <Card onClick={() => props.onDishSelect(props.dish)} className="my-5 p-1 shadow" style={{ cursor: "pointer" }}>
@@ -11,8 +13,7 @@ const ItemMenu = props => {
                     <CardImg
                         width="100%"
                         alt={props.dish.name}
-                        src={props.dish.image}
-                    //style={}
+                        src={props.axios ? base_url + props.dish.image : props.dish.image}
                     />
                 </CardBody>
                 <CardImgOverlay className="text-white fs-4">

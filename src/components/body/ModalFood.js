@@ -1,5 +1,6 @@
 import { Button, Modal } from "react-bootstrap";
-import CommentForm from "./CommentForm";
+import CommentForm from "./forms/CommentForm";
+import '../../StyleSheets/gradient.css';
 
 function ModalFood(props) {
     if (!props.dish) { return (<></>); }
@@ -10,7 +11,7 @@ function ModalFood(props) {
             </Modal.Header>
             <Modal.Body>{props.dishDetail}</Modal.Body>
             <CommentForm dishId={props.dish.id} addComment={props.addComment} />
-            <Modal.Footer>
+            <Modal.Footer className="myModalFooterBG shadow">
                 <Button variant="outline-secondary" onClick={props.modalHandler}>
                     Close
                 </Button>

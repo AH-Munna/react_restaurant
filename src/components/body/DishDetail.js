@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardImg, CardBody, CardTitle, CardText } from "reactstrap";
+import { base_url } from "../../redux/actTypes";
 import LoadComments from "./LoadComments";
+import PageLoad from "./PageLoad";
 
 const mapStateToProps = state => {
     return {
@@ -29,11 +31,14 @@ class DishDetail extends Component {
         //     }
         //     return (<LoadComments noComment={true} key={comment.id} />);
         // });
-        const allComments = this.props.comments.map(comment => {
-            return (
-                <LoadComments key={comment.id} commentObj={comment} />
-            )
-        })
+        let allComments = null;
+        if (!this.props.isLoading) {
+            allComments = this.props.comments.map(comment => {
+                return (
+                    <LoadComments key={comment.id} commentObj={comment} />
+                )
+            })
+        }
 
         //console.log(this.props.comments);
 
@@ -42,7 +47,7 @@ class DishDetail extends Component {
                 <Card className="p-2">
                     <CardImg
                         top
-                        src={this.props.dish.image}
+                        src={this.props.axios ? base_url + this.props.dish.image : this.props.dish.image}
                         alt={this.props.dish.name} />
                     <CardBody style={{ textAlign: "left" }}>
                         <CardTitle className="fw-b fs-4">{this.props.dish.name}</CardTitle>
@@ -53,7 +58,7 @@ class DishDetail extends Component {
                 <Card className="p-2 my-5">
                     <CardTitle className="display-6 text-center text-info mt-4">Comments</CardTitle>
                     <CardBody style={{ textAlign: "left" }}>
-                        {allComments}
+                        {this.props.isLoading ? <PageLoad /> : allComments}
                     </CardBody>
                 </Card>
             </div>

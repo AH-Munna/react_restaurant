@@ -12,7 +12,7 @@ const Home = props => {
     document.title = "React Restaurant2";
     return (
         <>
-            {props.state.comments[3].comment}
+            {/* {props.state.comments[3].comment} */}
             <PageLoad />
         </>
     );

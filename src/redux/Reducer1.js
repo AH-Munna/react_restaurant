@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import COMMENTS from "../data/Comments";
+// import COMMENTS from "../data/Comments";
 import * as actionType from './actTypes.js'
 
 // const state1 = {
@@ -8,27 +8,58 @@ import * as actionType from './actTypes.js'
 //     sample: "Hello World!",
 // }
 
-export const ReducerDish = (dState = { isLoading: false, dishes: [] }, action) => {
-    console.log("reducer", action);
+export const ReducerDish = (dState = { isLoading: false, errorMessage: null, dishes: [] }, action) => {
+    // debugger
+    // console.log("reducer", action);
     switch (action.type) {
+        case actionType.DISHES_LOAD_FAILED:
+            return {
+                ...dState,
+                isLoading: false,
+                errorMessage: action.payload,
+                dishes: [],
+            }
         case actionType.DISHES_LOADING:
             return {
                 ...dState,
                 isLoading: true,
+                errorMessage: null,
                 dishes: [],
             }
         case actionType.DISHES_LOADED:
             return {
                 ...dState,
                 isLoading: false,
+                errorMessage: null,
                 dishes: action.payload,
+                axios: action.axios
+            }
+        case actionType.DISHES_LOADED_AXIOS:
+            return {
+                ...dState,
+                isLoading: false,
+                dishes: action.payload,
+                errorMessage: null,
+                axios: action.axios
             }
         default:
             return dState;
     }
 }
-export const ReducerComment = (cState = COMMENTS, action) => {
+export const ReducerComment = (cState = { isLoading: true, comments: [] }, action) => {
     switch (action.type) {
+        case actionType.COMMENTS_LOADED:
+            return {
+                ...cState,
+                isLoading: false,
+                comments: action.payload
+            };
+        case actionType.COMMENTS_LOADING:
+            return {
+                ...cState,
+                isLoading: true,
+                comments: [],
+            }
         case "TEST":
             // return {
             //     ...cState,
@@ -43,12 +74,16 @@ export const ReducerComment = (cState = COMMENTS, action) => {
             break;
         case actionType.ADD_COMMENT:
             let commentObj = action.payload;
-            commentObj.id = cState.length;
+            commentObj.id = cState.comments.length;
             commentObj.date = new Date().toDateString();
             commentObj.rating = parseInt(commentObj.rating)
+            // debugger
             // console.log("obj", commentObj);
             // console.log("state", state);
-            return cState.concat(commentObj);
+            return {
+                ...cState,
+                comments: cState.comments.concat(commentObj)
+            };
         default:
             //console.log("action: ", action);
             return cState;

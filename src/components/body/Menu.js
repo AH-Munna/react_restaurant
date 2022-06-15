@@ -1,12 +1,12 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Alert, Container, Row } from "react-bootstrap";
 // import Foods from "../../data/Foods";
 import ItemMenu from "./ItemMenu";
 import DishDetail from "./DishDetail"
 import ModalFood from "./ModalFood";
 // import COMMENTS from "../../data/Comments";
 import { connect } from "react-redux";
-import { addComment, AsyncFetchDishes } from "../../redux/actionCreator";
+import { addJsonComment, AsyncFetchComments, AsyncFetchDishes } from "../../redux/actionCreator";
 import PageLoad from "./PageLoad";
 // import { addComment } from "../../redux/actionCreator";
 // import { ADD_COMMENT } from "../../redux/actTypes";
@@ -20,11 +20,11 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addComment: (dishId, author, comment, rating) => {
-            console.log("menu dispatch", dishId, author, comment, rating);
-            return dispatch(addComment(dishId, author, comment, rating))
+        addComment: commentObj => {
+            return dispatch(addJsonComment(commentObj))
         },
         fetchDishes: () => dispatch(AsyncFetchDishes()),
+        fetchComments: () => dispatch(AsyncFetchComments())
     }
 }
 
@@ -62,21 +62,28 @@ class Menu extends React.Component {
         })
     }
     componentDidMount() {
-        console.log(this.props);
+        //console.log("componentDidMount", this.props);
         this.props.fetchDishes();
+        this.props.fetchComments();
     }
 
     render() {
+        console.log(this.props);
         document.title = "Foods Menu";
         if (this.props.foods.isLoading) {
             return (
                 <PageLoad />
             );
+        } else if (this.props.foods.errorMessage !== null) {
+            return (<Alert key="danger" variant="danger">
+                Food menu <b className="warning">Failed</b> to Load from Json server
+            </Alert>)
         }
         // console.log("props", this.props);
         const menu = this.props.foods.dishes.map((item, index) => {
             return (
                 <ItemMenu
+                    axios={this.props.foods.axios}
                     dish={item}
                     key={index}
                     // should be key={item.id}
@@ -87,14 +94,19 @@ class Menu extends React.Component {
 
         let dishDetail = null;
         if (this.state.selectedDish != null) {
-            const selectedDishComments = this.props.comments.filter(comment => {
+            // debugger
+            const selectedDishComments = this.props.comments.comments.filter(comment => {
                 return comment.dishId === this.state.selectedDish.id;
             })
             //console.log("selectedComments Filter", selectedDishComments);
-            dishDetail = <DishDetail dish={this.state.selectedDish} comments={selectedDishComments} />
+            dishDetail = <DishDetail
+                axios={this.props.foods.axios}
+                dish={this.state.selectedDish}
+                comments={selectedDishComments}
+                isLoading={this.props.comments.isLoading} />
         }
 
-        //console.log("menu.js", this.props.comments);
+        //console.log("menu.js", this.props);
 
         return (
             <Container>
@@ -109,6 +121,7 @@ class Menu extends React.Component {
                     dish={this.state.selectedDish}
                     addComment={this.props.addComment} />
                 <Row>
+                    <h1>Axios = {this.props.foods.axios ? <>TRUE</> : <>FALSE</>} </h1>
                     {menu}
                 </Row>
             </Container>

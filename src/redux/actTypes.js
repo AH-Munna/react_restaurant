@@ -1,4 +1,11 @@
 export const ADD_COMMENT = "ADD_NEW_COMMENT";
 
-export const DISHES_LOADED = "DISHES_LOADED";
 export const DISHES_LOADING = "DISHES_LOADING";
+export const DISHES_LOADED = "DISHES_LOADED";
+export const DISHES_LOADED_AXIOS = "DISHES_LOADED_AXIOS";
+export const DISHES_LOAD_FAILED = "DISHES_LOAD_FAILED_FROM_AXIOS";
+
+export const COMMENTS_LOADING = "COMMENTS_LOADING";
+export const COMMENTS_LOADED = "COMMENTS_LOADED";
+
+export const base_url = "http://localhost:3002/";

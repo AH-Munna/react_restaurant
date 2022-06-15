@@ -5,7 +5,7 @@ import '../../StyleSheets/footer.css';
 
 const Footer = () => {
     return (
-        <Box>
+        <Box className="mt-5">
             <h1 style={{
                 color: "green",
                 textAlign: "center",

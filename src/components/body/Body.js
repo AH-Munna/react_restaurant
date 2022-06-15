@@ -2,8 +2,8 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router";
 import About from "./About";
 import Menu from "./Menu";
-import Contact from "./Contact";
 import Home from "./Home";
+import Contact from "./forms/Contact";
 
 
 const Body = () => {
